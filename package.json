@@ -1,0 +1,48 @@
+{
+  "name": "reparser",
+  "version": "0.0.1",
+  "description": "Retext parser utilities",
+  "keywords": [
+    "retext",
+    "parser",
+    "utilities"
+  ],
+  "author": "Titus Wormer <tituswormer@gmail.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "complexity-report": "~1.0.3",
+    "eslint": "^0.6.2",
+    "istanbul": "~0.2.11",
+    "jscs": "^1.4.5",
+    "mocha": "~1.20.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/reparser.git"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/_mocha --reporter spec --check-leaks -u exports spec/reparser.spec.js",
+    "test-travis": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcovonly -- --reporter spec --check-leaks -u exports spec/reparser.spec.js",
+    "lint": "node_modules/.bin/eslint index.js spec/simple-parser.js --env node --env browser --rule 'quotes: [2, single]' && node_modules/.bin/eslint spec/reparser.spec.js --env node --env mocha --rule 'quotes: [2, single], no-loop-func: false' && node_modules/.bin/jscs index.js spec/simple-parser.js spec/reparser.spec.js --reporter=inline",
+    "coverage": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -- spec spec/reparser.spec.js",
+    "complexity": "node_modules/.bin/cr -l --maxcyc 20 --format minimal --silent index.js",
+    "make": "npm run-script lint && npm run-script complexity && npm run-script coverage"
+  },
+  "testling": {
+    "files": "spec/reparser.spec.js",
+    "harness": "mocha",
+    "browsers": [
+      "iexplore/latest",
+      "chrome/latest",
+      "chrome/canary",
+      "firefox/latest",
+      "firefox/nightly",
+      "opera/latest",
+      "opera/next",
+      "safari/latest",
+      "iphone/latest",
+      "android-browser/latest"
+    ]
+  }
+}
